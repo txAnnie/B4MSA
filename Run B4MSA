@@ -14,27 +14,27 @@ pip install --user nose
 pip install --user nltk
 
 
-2.
+2.Download B4MSA
 git clone https://github.com/INGEOTEC/b4msa.git
 
 
-3.
+3.Compile
 python setup.py install --single-version-externally-managed --record=record.txt
 
-4.
+4.Prepare 
 cd tests
 gzip text.json   (training set:text.json.gz)
 gzip textI.json   (test set:textI.json.gz)
 cd b4msa-master
 
 
-5.
+5.Optimize B4MSA parameters
 b4msa-params -k5 -s24 -n24 text.json.gz -o text.json      (after that appear 'text.json')
 
 
-6.train
+6.Train
 b4msa-train -o b4msa.model -m text.json text.json.gz      (after that appear 'b4msa.model')
 
 
-7.test
+7.Test
 b4msa-test -m b4msa.model -o predicted.json.gz textI.json.gz   (fater that appear the result file :'predicted.json.gz')
