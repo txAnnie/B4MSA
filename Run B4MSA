@@ -1,0 +1,40 @@
+1.Installing dependencies
+
+wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+chmod 755 miniconda.sh
+./miniconda.sh -b
+export PATH=/home/$USER/miniconda3/bin:$PATH
+
+pip install --user coverage
+pip install --user numpy
+pip install --user scipy
+pip install --user scikit-learn
+pip install --user gensim
+pip install --user nose
+pip install --user nltk
+
+
+2.
+git clone https://github.com/INGEOTEC/b4msa.git
+
+
+3.
+python setup.py install --single-version-externally-managed --record=record.txt
+
+4.
+cd tests
+gzip text.json   (training set:text.json.gz)
+gzip textI.json   (test set:textI.json.gz)
+cd b4msa-master
+
+
+5.
+b4msa-params -k5 -s24 -n24 text.json.gz -o text.json      (after that appear 'text.json')
+
+
+6.train
+b4msa-train -o b4msa.model -m text.json text.json.gz      (after that appear 'b4msa.model')
+
+
+7.test
+b4msa-test -m b4msa.model -o predicted.json.gz textI.json.gz   (fater that appear the result file :'predicted.json.gz')
